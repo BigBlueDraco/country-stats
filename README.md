@@ -15,7 +15,7 @@ A real-time country statistics tracking application with a scalable backend and 
 
 ```bash
 git clone <repository-url>
-cd turbo-app
+cd country-stats
 cp example.env .env
 npm run docker:up
 ```
@@ -73,7 +73,6 @@ That's it! 🎉 The application will be available at:
 - **Backend**: NestJS + TypeScript (5 load-balanced instances)
 - **Proxy**: Nginx for routing and load balancing
 - **Database**: Redis for real-time statistics storage
-- **Monitoring**: Built-in health checks and restart policies
 
 ## 🛠️ Development
 
@@ -210,14 +209,6 @@ cd apps/backend && npm test && npm run test:e2e
 # Frontend
 cd apps/frontend && npm test
 ```
-
-## 🔒 Security Features
-
-- ✅ **CORS Protection**: Configured for frontend domain
-- ✅ **Proxy Headers**: Secure proxy configuration
-- ✅ **Input Validation**: Request validation with class-validator
-- ✅ **Rate Limiting**: Built-in request rate limiting
-- ✅ **Security Headers**: Standard security headers via Nginx
 
 ## 📈 Performance
 
