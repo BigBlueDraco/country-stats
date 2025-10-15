@@ -1,0 +1,108 @@
+version: "3.9"
+services:
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - backend-1
+      - frontend
+    restart: unless-stopped
+
+  backend-1:
+    build:
+      context: .
+      dockerfile: ./apps/backend/Dockerfile
+    expose:
+      - "3000"
+    depends_on:
+      - redis
+    environment:
+      - FRONT_URL=${FRONT_URL}
+      - REDIS_HOST=${REDIS_HOST}
+      - REDIS_PORT=${REDIS_PORT}
+      - TRUST_PROXY=true
+      - INSTANCE_NAME=backend-1
+    restart: unless-stopped
+  backend-2:
+    build:
+      context: .
+      dockerfile: ./apps/backend/Dockerfile
+    expose:
+      - "3000"
+    depends_on:
+      - redis
+    environment:
+      - FRONT_URL=${FRONT_URL}
+      - REDIS_HOST=${REDIS_HOST}
+      - REDIS_PORT=${REDIS_PORT}
+      - TRUST_PROXY=true
+      - INSTANCE_NAME=backend-1
+    restart: unless-stopped
+  backend-3:
+    build:
+      context: .
+      dockerfile: ./apps/backend/Dockerfile
+    expose:
+      - "3000"
+    depends_on:
+      - redis
+    environment:
+      - FRONT_URL=${FRONT_URL}
+      - REDIS_HOST=${REDIS_HOST}
+      - REDIS_PORT=${REDIS_PORT}
+      - TRUST_PROXY=true
+      - INSTANCE_NAME=backend-1
+    restart: unless-stopped
+  backend-4:
+    build:
+      context: .
+      dockerfile: ./apps/backend/Dockerfile
+    expose:
+      - "3000"
+    depends_on:
+      - redis
+    environment:
+      - FRONT_URL=${FRONT_URL}
+      - REDIS_HOST=${REDIS_HOST}
+      - REDIS_PORT=${REDIS_PORT}
+      - TRUST_PROXY=true
+      - INSTANCE_NAME=backend-1
+    restart: unless-stopped
+  backend-5:
+    build:
+      context: .
+      dockerfile: ./apps/backend/Dockerfile
+    expose:
+      - "3000"
+    depends_on:
+      - redis
+    environment:
+      - FRONT_URL=${FRONT_URL}
+      - REDIS_HOST=${REDIS_HOST}
+      - REDIS_PORT=${REDIS_PORT}
+      - TRUST_PROXY=true
+      - INSTANCE_NAME=backend-1
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: .
+      dockerfile: ./apps/frontend/Dockerfile
+    expose:
+      - "80"
+    environment:
+      - VITE_BACKEND_URL=${BACKEND_URL}
+    restart: unless-stopped
+
+  redis:
+    image: redis:latest
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    environment:
+      - REDIS_PASSWORD=${REDIS_PASSWORD}
+      - REDIS_PORT=6379
+      - REDIS_DATABASES=16

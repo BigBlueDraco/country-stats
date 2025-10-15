@@ -1,0 +1,8 @@
+MONGODB_URI="mongodb://localhost:27017"
+VAPID_PUBLIC_KEY=""
+VAPID_PRIVATE_KEY=""
+VAPID_SUBJECT="mailto:you@example.com"
+REDIS_HOST="redis"
+REDIS_PORT="6379"
+FRONT_URL="http://localhost:4000"
+BACKEND_URL="http://backend:3000"
